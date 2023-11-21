@@ -1,9 +1,13 @@
 package com.tobeto.a.spring.intro.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Table(name = "customers")
 @Entity
+@Getter
+@Setter
 public class Customer
 {
     @Id
@@ -23,8 +27,6 @@ public class Customer
     @Column(name = "phone_number")
     private int phoneNumber;
 
-    @Column(name = "address")
-    private String address;
 
     //Manytoone
     //rental
@@ -36,4 +38,13 @@ public class Customer
     @ManyToOne
     @JoinColumn(name = "car_id")
     private Car cars;
+
+    @ManyToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
+
+    @ManyToOne
+    @JoinColumn(name = "payment_id")
+    private PaymentMethods paymentMethods;
+
 }

@@ -7,26 +7,24 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Table(name = "rentals")
+@Table(name = "address")
 @Entity
 @Getter
 @Setter
-public class Rental
-{
+
+public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "rental_id")
-    private int rentalId;
+    @Column(name = "address_id")
+    private int addressId;
 
-    @Column(name = "rental_date")
-    private String rentalDate;
+    @Column(name ="city")
+    private String cityName;
 
-    @Column(name = "end_date")
-    private String endDate;
+    @Column(name = "country")
+    private String countryName;
 
-    //onetomany
-    //customers
-    @OneToMany(mappedBy = "rentals")
+    @OneToMany(mappedBy = "address")
     @JsonIgnore
     private List<Customer> customers;
 }

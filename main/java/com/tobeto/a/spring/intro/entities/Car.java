@@ -1,13 +1,23 @@
 package com.tobeto.a.spring.intro.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+//Repository, DAO, DAL
+//Data Access Object
+//Data Access Layer
+
+
 // ORM => Object Relation Mapping
 @Table(name = "cars") //databasedeki cars tablosunun konfigürasyonu
 @Entity
+@Getter
+@Setter
 public class Car
 {
     @Id
@@ -16,22 +26,17 @@ public class Car
     private int carId; //classın içindeki alanın adı
 
     @Column(name="brands")
-    private String marka;
+    private String brands;
 
     @Column(name = "models")
     private String models;
 
     @Column(name = "year")
-    private int yıl;
+    private int year;
 
     @Column(name = "license_number")
     private String licenseNumber;
 
-    @Column(name = "daily_price")
-    private double dailyPrice;
-
-    @Column(name = "weekly_price")
-    private double weeklyPrice;
 
     //TODO=> ilişkisel status tablosunun alanlarını eklemek
 
@@ -43,5 +48,10 @@ public class Car
     //one to many
     //customers
     @OneToMany(mappedBy = "cars")
+    @JsonIgnore
     private List<Customer> customers;
+
+    @ManyToOne
+    @JoinColumn(name = "payment_id")
+    private PaymentMethods paymentMethods;
 }

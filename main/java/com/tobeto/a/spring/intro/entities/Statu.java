@@ -1,11 +1,16 @@
 package com.tobeto.a.spring.intro.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @Table(name = "status")
 @Entity
+@Getter
+@Setter
 public class Statu
 {
     @Id
@@ -21,5 +26,6 @@ public class Statu
     //@onetomany
     //direkt class olan değişken @manytoone
     @OneToMany(mappedBy = "status") //Car classımda atadığım değişken ismi
+    @JsonIgnore //sonsuz döngüden kaçınmak amacıyla listeleri JSON'da göstermiyoruz.
     private List<Car> cars;
 }
