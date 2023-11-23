@@ -1,6 +1,9 @@
 package com.tobeto.a.spring.intro.controller;
-import com.tobeto.a.spring.intro.entities.Rental;
-import com.tobeto.a.spring.intro.repositories.RentalRepository;
+
+import com.tobeto.a.spring.intro.services.abstracts.RentalService;
+import com.tobeto.a.spring.intro.services.dtos.rental.request.AddRentalRequest;
+import com.tobeto.a.spring.intro.services.dtos.rental.request.DeleteRentalRequest;
+import com.tobeto.a.spring.intro.services.dtos.rental.request.UpdateRentalRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,40 +12,24 @@ import java.util.List;
 @RequestMapping("api/rental")
 public class RentalController
 {
-    public RentalController(RentalRepository rentalRepository) {
-        this.rentalRepository = rentalRepository;
-    }
+    private RentalService rentalService;
 
-    private final RentalRepository rentalRepository;
-
-
-    public List<Rental> getAll(){
-        return rentalRepository.findAll();
-    }
-
-    @GetMapping("{id}")
-    public Rental getAll(@PathVariable int id){
-        return rentalRepository.findById(id).orElseThrow();
+    public RentalController(RentalService rentalService) {
+        this.rentalService = rentalService;
     }
 
     @PostMapping
-    public void add(@RequestBody Rental rental){
-        rentalRepository.save(rental);
+    public void add(@RequestBody AddRentalRequest request){
+        rentalService.add(request);
     }
 
-    @DeleteMapping("{id}")
-    public void delete(@PathVariable int id){
-        Rental rentalToDelete = rentalRepository.findById(id).orElseThrow();
-        rentalRepository.delete(rentalToDelete);
+    @DeleteMapping
+    public void delete(@PathVariable DeleteRentalRequest request){
+        rentalService.delete(request);
     }
 
-    @PutMapping("{id}")
-    public void update(@PathVariable int id, @RequestBody Rental rental){
-        Rental rentalToUpdate = rentalRepository.findById(id).orElseThrow();
-        rentalToUpdate.setRentalDate(rental.getRentalDate());
-        rentalToUpdate.setEndDate(rental.getEndDate());
-        rentalRepository.save(rentalToUpdate);
+    @PutMapping
+    public void update(@RequestBody UpdateRentalRequest request){
+        rentalService.update(request);
     }
-
-
 }

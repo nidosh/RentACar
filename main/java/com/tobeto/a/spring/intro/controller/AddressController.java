@@ -1,44 +1,36 @@
 package com.tobeto.a.spring.intro.controller;
 
-import com.tobeto.a.spring.intro.entities.Address;
-import com.tobeto.a.spring.intro.repositories.AddressRepository;
+
+import com.tobeto.a.spring.intro.services.abstracts.AddressService;
+import com.tobeto.a.spring.intro.services.dtos.address.request.AddAddressRequest;
+import com.tobeto.a.spring.intro.services.dtos.address.request.DeleteAddressRequest;
+import com.tobeto.a.spring.intro.services.dtos.address.request.UpdateAddressRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
+@RequestMapping("api/address")
 public class AddressController
 {
-    private final AddressRepository addressRepository;
+    private AddressService addressService;
 
-    public AddressController(AddressRepository addressRepository) {
-        this.addressRepository = addressRepository;
-    }
-
-    public List<Address> getAll(){
-        return addressRepository.findAll();
-    }
-
-    @GetMapping("{id}")
-    public Address getAll(@PathVariable int id){
-        return addressRepository.findById(id).orElseThrow();
+    public AddressController(AddressService addressService) {
+        this.addressService = addressService;
     }
 
     @PostMapping
-    public void add(@RequestBody Address address){
-        addressRepository.save(address);
+    public void add(@RequestBody AddAddressRequest request){
+        addressService.add(request);
     }
 
-    @DeleteMapping("{id}")
-    public void delete(@PathVariable int id){
-        Address addresstoDelete = addressRepository.findById(id).orElseThrow();
-        addressRepository.delete(addresstoDelete);
+    @DeleteMapping
+    public void delete(@PathVariable DeleteAddressRequest request){
+        addressService.delete(request);
     }
 
-    @PutMapping("{id}")
-    public void update(@PathVariable int id, @RequestBody Address address){
-        Address addressToUpdate = addressRepository.findById(id).orElseThrow();
-        addressToUpdate.setCityName(address.getCityName());
-        addressToUpdate.setCountryName(address.getCountryName());
-        addressRepository.save(addressToUpdate);
+    @PutMapping
+    public void update(@RequestBody UpdateAddressRequest request){
+        addressService.update(request);
     }
 }

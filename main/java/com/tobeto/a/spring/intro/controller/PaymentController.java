@@ -2,47 +2,39 @@ package com.tobeto.a.spring.intro.controller;
 
 import com.tobeto.a.spring.intro.entities.PaymentMethods;
 import com.tobeto.a.spring.intro.repositories.PaymentRepository;
+import com.tobeto.a.spring.intro.services.abstracts.PaymentService;
+import com.tobeto.a.spring.intro.services.dtos.address.request.UpdateAddressRequest;
+import com.tobeto.a.spring.intro.services.dtos.payment.request.AddPaymentRequest;
+import com.tobeto.a.spring.intro.services.dtos.payment.request.DeletePaymentRequest;
+import com.tobeto.a.spring.intro.services.dtos.payment.request.UpdatePaymentRequest;
 import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
 
+@RestController
+@RequestMapping("api/payment")
 public class PaymentController
 {
-    private PaymentRepository paymentRepository;
+    private PaymentService paymentService;
 
-    public PaymentController(PaymentRepository paymentRepository) {
-        this.paymentRepository = paymentRepository;
+    public PaymentController(PaymentService paymentService) {
+        this.paymentService = paymentService;
     }
-
-    public List<PaymentMethods> getAll(){
-        return paymentRepository.findAll();
-    }
-
-    @GetMapping("{id}")
-        public PaymentMethods getAll(@PathVariable int id){
-            return paymentRepository.findById(id).orElseThrow();
-        }
 
     @PostMapping
-    public void add(@RequestBody PaymentMethods paymentMethods){
-        paymentRepository.save(paymentMethods);
+    public void add(@RequestBody AddPaymentRequest request){
+        paymentService.add(request);
     }
 
-    @DeleteMapping("{id}")
-    public void delete(@PathVariable int id){
-        PaymentMethods paymentToDelete = paymentRepository.findById(id).orElseThrow();
-        paymentRepository.delete(paymentToDelete);
+    @DeleteMapping
+    public void delete(@PathVariable DeletePaymentRequest request){
+        paymentService.delete(request);
     }
 
-    @PutMapping("{id}")
-    public void update(@PathVariable int id, @RequestBody PaymentMethods paymentMethods){
-        PaymentMethods paymentToUpdate = paymentRepository.findById(id).orElseThrow();
-        paymentToUpdate.setDailyPrice(paymentToUpdate.getDailyPrice());
-        paymentToUpdate.setWeeklyPrice(paymentToUpdate.getWeeklyPrice());
-        paymentToUpdate.setCard(paymentToUpdate.isCard());
-        paymentToUpdate.setCash(paymentToUpdate.isCash());
-        paymentRepository.save(paymentToUpdate);
+    @PutMapping
+    public void update(@RequestBody UpdatePaymentRequest request){
+        paymentService.update(request);
     }
 }
 
