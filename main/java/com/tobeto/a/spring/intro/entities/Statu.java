@@ -16,10 +16,11 @@ public class Statu
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "status_id")
-    private int statusId;
+    private int statuId;
 
     @Column(name = "car_status")
-    private String carStatus;
+    private String name;
+
 
 
     //one-to-one ilişkilerde list olan değişken

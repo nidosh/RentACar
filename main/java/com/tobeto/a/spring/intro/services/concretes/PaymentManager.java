@@ -6,7 +6,10 @@ import com.tobeto.a.spring.intro.services.abstracts.PaymentService;
 import com.tobeto.a.spring.intro.services.dtos.payment.request.AddPaymentRequest;
 import com.tobeto.a.spring.intro.services.dtos.payment.request.DeletePaymentRequest;
 import com.tobeto.a.spring.intro.services.dtos.payment.request.UpdatePaymentRequest;
+import com.tobeto.a.spring.intro.services.dtos.payment.response.GetListPaymentResponse;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PaymentManager implements PaymentService {
@@ -39,5 +42,10 @@ public class PaymentManager implements PaymentService {
         paymentMethodsToUpdate.setCash(request.isCash());
         paymentMethodsToUpdate.setCard(request.isCard());
         paymentRepository.save(paymentMethodsToUpdate);
+    }
+
+    @Override
+    public List<GetListPaymentResponse> getByDailyAndWeeklyPriceDto(double dailyPrice, double weeklyPrice) {
+        return paymentRepository.findByDailyAndWeeklyPrice(dailyPrice,weeklyPrice);
     }
 }

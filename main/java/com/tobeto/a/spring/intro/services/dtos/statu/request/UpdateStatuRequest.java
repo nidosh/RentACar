@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class UpdateStatuRequest
 {
-    private String carStatus;
+    private String name;
     private int statuId;
 }

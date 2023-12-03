@@ -6,8 +6,11 @@ import com.tobeto.a.spring.intro.services.abstracts.CustomerService;
 import com.tobeto.a.spring.intro.services.dtos.customer.request.AddCustomerRequest;
 import com.tobeto.a.spring.intro.services.dtos.customer.request.DeleteCustomerRequest;
 import com.tobeto.a.spring.intro.services.dtos.customer.request.UpdateCustomerRequest;
+import com.tobeto.a.spring.intro.services.dtos.customer.response.GetListCustomerResponse;
 import org.hibernate.annotations.SecondaryRow;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CustomerManager implements CustomerService
@@ -41,5 +44,10 @@ public class CustomerManager implements CustomerService
         customerToUpdate.setLastName(request.getLastName());
         customerToUpdate.setPhoneNumber(request.getPhoneNumber());
         customerToUpdate.setCardNumber(request.getCardNumber());
+    }
+
+    @Override
+    public List<GetListCustomerResponse> getByFirstAndLastNameDto(String firstName, String lastName) {
+        return customerRepository.findByFirstAndLastName(firstName,lastName);
     }
 }

@@ -6,7 +6,10 @@ import com.tobeto.a.spring.intro.services.abstracts.CarService;
 import com.tobeto.a.spring.intro.services.dtos.car.request.AddCarRequest;
 import com.tobeto.a.spring.intro.services.dtos.car.request.DeleteCarRequest;
 import com.tobeto.a.spring.intro.services.dtos.car.request.UpdateCarRequest;
+import com.tobeto.a.spring.intro.services.dtos.car.response.GetListCarResponse;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CarManager implements CarService {
@@ -41,4 +44,15 @@ public class CarManager implements CarService {
         carToUpdate.setYear(request.getYear());
         carRepository.save(carToUpdate);
     }
+
+    @Override
+    public List<GetListCarResponse> getByModelsNameDto(String models) {
+        return carRepository.findByModels(models);
+    }
+
+    @Override
+    public List<GetListCarResponse> getByBrandsNameDto(String brands) {
+        return carRepository.findByBrans(brands);
+    }
+
 }

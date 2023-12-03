@@ -4,6 +4,7 @@ import com.tobeto.a.spring.intro.services.abstracts.CarService;
 import com.tobeto.a.spring.intro.services.dtos.car.request.AddCarRequest;
 import com.tobeto.a.spring.intro.services.dtos.car.request.DeleteCarRequest;
 import com.tobeto.a.spring.intro.services.dtos.car.request.UpdateCarRequest;
+import com.tobeto.a.spring.intro.services.dtos.car.response.GetListCarResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,4 +33,15 @@ public class CarController
     public void update(@RequestBody UpdateCarRequest request){
         carService.update(request);
     }
+
+    @GetMapping("/api/car/dto/models")
+    public List<GetListCarResponse>getByModelsNameDto(@RequestParam String models){
+        return carService.getByModelsNameDto(models);
+    }
+
+    @GetMapping("/api/car/dto/brands")
+    public List<GetListCarResponse>getByBrandsNameDto(@RequestParam String brands){
+        return carService.getByBrandsNameDto(brands);
+    }
+
 }

@@ -3,10 +3,10 @@ package com.tobeto.a.spring.intro.controller;
 import com.tobeto.a.spring.intro.entities.PaymentMethods;
 import com.tobeto.a.spring.intro.repositories.PaymentRepository;
 import com.tobeto.a.spring.intro.services.abstracts.PaymentService;
-import com.tobeto.a.spring.intro.services.dtos.address.request.UpdateAddressRequest;
 import com.tobeto.a.spring.intro.services.dtos.payment.request.AddPaymentRequest;
 import com.tobeto.a.spring.intro.services.dtos.payment.request.DeletePaymentRequest;
 import com.tobeto.a.spring.intro.services.dtos.payment.request.UpdatePaymentRequest;
+import com.tobeto.a.spring.intro.services.dtos.payment.response.GetListPaymentResponse;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -35,6 +35,11 @@ public class PaymentController
     @PutMapping
     public void update(@RequestBody UpdatePaymentRequest request){
         paymentService.update(request);
+    }
+
+    @GetMapping("dto")
+    public List<GetListPaymentResponse>getListPaymentResponses(@RequestParam double dailyPrice, double weeklyPrice){
+        return paymentService.getByDailyAndWeeklyPriceDto(dailyPrice, weeklyPrice);
     }
 }
 

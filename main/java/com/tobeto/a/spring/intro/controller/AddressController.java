@@ -5,6 +5,7 @@ import com.tobeto.a.spring.intro.services.abstracts.AddressService;
 import com.tobeto.a.spring.intro.services.dtos.address.request.AddAddressRequest;
 import com.tobeto.a.spring.intro.services.dtos.address.request.DeleteAddressRequest;
 import com.tobeto.a.spring.intro.services.dtos.address.request.UpdateAddressRequest;
+import com.tobeto.a.spring.intro.services.dtos.address.response.GetListAddressResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,5 +33,10 @@ public class AddressController
     @PutMapping
     public void update(@RequestBody UpdateAddressRequest request){
         addressService.update(request);
+    }
+
+    @GetMapping("dto")
+    public List<GetListAddressResponse>getByCountryNameDto(@RequestParam String countryName){
+        return addressService.getByCountryNameDto(countryName);
     }
 }

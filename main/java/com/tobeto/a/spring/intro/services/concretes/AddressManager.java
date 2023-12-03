@@ -6,7 +6,10 @@ import com.tobeto.a.spring.intro.services.abstracts.AddressService;
 import com.tobeto.a.spring.intro.services.dtos.address.request.AddAddressRequest;
 import com.tobeto.a.spring.intro.services.dtos.address.request.DeleteAddressRequest;
 import com.tobeto.a.spring.intro.services.dtos.address.request.UpdateAddressRequest;
+import com.tobeto.a.spring.intro.services.dtos.address.response.GetListAddressResponse;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -37,5 +40,10 @@ public class AddressManager implements AddressService {
         addressToUpdate.setCountryName(request.getCountryName());
         addressToUpdate.setCityName(request.getCityName());
         addressRepository.save(addressToUpdate);
+    }
+
+    @Override
+    public List<GetListAddressResponse> getByCountryNameDto(String countryName) {
+        return addressRepository.findByCountryName(countryName);
     }
 }

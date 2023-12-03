@@ -6,7 +6,10 @@ import com.tobeto.a.spring.intro.services.abstracts.RentalService;
 import com.tobeto.a.spring.intro.services.dtos.rental.request.AddRentalRequest;
 import com.tobeto.a.spring.intro.services.dtos.rental.request.DeleteRentalRequest;
 import com.tobeto.a.spring.intro.services.dtos.rental.request.UpdateRentalRequest;
+import com.tobeto.a.spring.intro.services.dtos.rental.response.GetListRentalResponse;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class RentalManager implements RentalService {
@@ -36,6 +39,12 @@ public class RentalManager implements RentalService {
         rentalToUpdate.setRentalDate(request.getRentalDate());
         rentalToUpdate.setEndDate(request.getEndDate());
         rentalRepository.save(rentalToUpdate);
+    }
+
+
+    @Override
+    public List<GetListRentalResponse> getByRentalDateDto(String rentalDate) {
+        return rentalRepository.findByStartDateAfter(rentalDate);
     }
 
 

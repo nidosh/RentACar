@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class AddStatuRequest {
-    private String carStatus;
+    private String name;
 }
