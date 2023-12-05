@@ -1,5 +1,4 @@
 package com.tobeto.a.spring.intro.controller;
-import com.tobeto.a.spring.intro.entities.Statu;
 import com.tobeto.a.spring.intro.services.abstracts.StatuService;
 import com.tobeto.a.spring.intro.services.dtos.statu.request.AddStatuRequest;
 import com.tobeto.a.spring.intro.services.dtos.statu.request.DeleteStatuRequest;
@@ -41,7 +40,7 @@ public class StatusController
 
     //normal hali
     @GetMapping
-    public List<Statu>getByName(@RequestParam String name){
+    public List<GetListStatuResponse> getByName(@RequestParam String name){
         return statuService.getByName(name);
     }
 
@@ -50,6 +49,7 @@ public class StatusController
     public List<GetListStatuResponse>getByNameDto(@RequestParam String name){
         return statuService.getByNameDto(name);
     }
+
 
 }
 

@@ -14,6 +14,7 @@ public interface CarService {
 
     List<GetListCarResponse> getByModelsNameDto(String models);
     List<GetListCarResponse>getByBrandsNameDto(String brands);
+    List<GetListCarResponse>getAll();
 
 
 }

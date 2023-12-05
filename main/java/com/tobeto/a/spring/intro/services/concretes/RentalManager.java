@@ -41,11 +41,12 @@ public class RentalManager implements RentalService {
         rentalRepository.save(rentalToUpdate);
     }
 
-
     @Override
     public List<GetListRentalResponse> getByRentalDateDto(String rentalDate) {
-        return rentalRepository.findByStartDateAfter(rentalDate);
+        return rentalRepository.findByStartDateAfter(rentalDate)
+                .stream()
+                .map((Rental) -> new GetListRentalResponse(Rental.getRentalDate(),Rental.getEndDate()))
+                .toList();
     }
-
 
 }

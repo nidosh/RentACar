@@ -44,4 +44,9 @@ public class CarController
         return carService.getByBrandsNameDto(brands);
     }
 
+    @GetMapping("getAll")
+    public List<GetListCarResponse>getAll(){
+        return carService.getAll();
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.tobeto.a.spring.intro.services.dtos.car.response;
 
+import com.tobeto.a.spring.intro.services.dtos.statu.response.GetListStatuResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,4 +11,6 @@ import lombok.NoArgsConstructor;
 public class GetListCarResponse {
     private String models;
     private String brands;
+    private GetListStatuResponse status;
+
 }

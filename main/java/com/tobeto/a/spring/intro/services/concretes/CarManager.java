@@ -52,7 +52,15 @@ public class CarManager implements CarService {
 
     @Override
     public List<GetListCarResponse> getByBrandsNameDto(String brands) {
-        return carRepository.findByBrans(brands);
+        return carRepository.findByModels(brands);
+    }
+
+    @Override
+    public List<GetListCarResponse> getAll() {
+        return carRepository.getAll()
+                .stream()
+                .map((Car) ->new GetListCarResponse(Car.getModels(), Car.getBrands(),Car.getStatus()))
+                .toList();
     }
 
 }

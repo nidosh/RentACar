@@ -50,4 +50,14 @@ public class CustomerManager implements CustomerService
     public List<GetListCustomerResponse> getByFirstAndLastNameDto(String firstName, String lastName) {
         return customerRepository.findByFirstAndLastName(firstName,lastName);
     }
+
+    @Override
+    public List<GetListCustomerResponse> getAll() {
+        return customerRepository.getAll()
+                .stream()
+                .map((Customer) -> new GetListCustomerResponse(Customer.getFirstName(), Customer.getLastName(), Customer.getCars(),Customer.getRentals()))
+                .toList();
+    }
+
+
 }

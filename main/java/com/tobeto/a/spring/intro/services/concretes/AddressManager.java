@@ -44,6 +44,9 @@ public class AddressManager implements AddressService {
 
     @Override
     public List<GetListAddressResponse> getByCountryNameDto(String countryName) {
-        return addressRepository.findByCountryName(countryName);
+        return addressRepository.findByCountryName(countryName).
+                stream()
+                .map((Address) -> new GetListAddressResponse(Address.getCountryName()))
+                .toList();
     }
 }

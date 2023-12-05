@@ -43,12 +43,17 @@ public class StatuManager implements StatuService
     }
 
     @Override
-    public List<Statu> getByName(String name) {
-        return statuRepository.findByNameStartingWith(name);
+    public List<GetListStatuResponse> getByName(String name) {
+        //return statuRepository.findByNameStartingWith(name);
+        return statuRepository.findByNameStartingWith(name)
+                .stream()
+                .map((statu -> new GetListStatuResponse(statu.getName(), statu.getStatuId())))
+                .toList();
     }
 
     @Override
     public List<GetListStatuResponse> getByNameDto(String name) {
+
         return statuRepository.findByName(name);
     }
 

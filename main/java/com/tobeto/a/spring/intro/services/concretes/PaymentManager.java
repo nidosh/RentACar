@@ -46,6 +46,10 @@ public class PaymentManager implements PaymentService {
 
     @Override
     public List<GetListPaymentResponse> getByDailyAndWeeklyPriceDto(double dailyPrice, double weeklyPrice) {
-        return paymentRepository.findByDailyAndWeeklyPrice(dailyPrice,weeklyPrice);
+        return paymentRepository.findByDailyAndWeeklyPrice(dailyPrice,weeklyPrice)
+                .stream()
+                .map((PaymentMethods) -> new GetListPaymentResponse(PaymentMethods.getDailyPrice(),PaymentMethods.getWeeklyPrice()))
+                .filter(payment -> payment.getDailyPrice() > 4000)
+                .toList();
     }
 }
