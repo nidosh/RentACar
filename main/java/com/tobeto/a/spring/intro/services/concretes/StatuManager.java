@@ -7,6 +7,7 @@ import com.tobeto.a.spring.intro.services.dtos.statu.request.AddStatuRequest;
 import com.tobeto.a.spring.intro.services.dtos.statu.request.DeleteStatuRequest;
 import com.tobeto.a.spring.intro.services.dtos.statu.request.UpdateStatuRequest;
 import com.tobeto.a.spring.intro.services.dtos.statu.response.GetListStatuResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
 @Service
 public class StatuManager implements StatuService
 {
+    @Autowired
     private StatuRepository statuRepository;
 
     public StatuManager(StatuRepository statuRepository) {
@@ -31,13 +33,13 @@ public class StatuManager implements StatuService
 
     @Override
     public void delete(DeleteStatuRequest request) {
-        Statu statuToDelete = statuRepository.findById(request.getStatuId()).orElseThrow();
+        Statu statuToDelete = statuRepository.findById(request.getId()).orElseThrow();
         statuRepository.delete(statuToDelete);
     }
 
     @Override
     public void update(UpdateStatuRequest request) {
-        Statu statuToUpdate = statuRepository.findById(request.getStatuId()).orElseThrow();
+        Statu statuToUpdate = statuRepository.findById(request.getId()).orElseThrow();
         statuToUpdate.setName(request.getName());
         statuRepository.save(statuToUpdate);
     }
@@ -47,7 +49,7 @@ public class StatuManager implements StatuService
         //return statuRepository.findByNameStartingWith(name);
         return statuRepository.findByNameStartingWith(name)
                 .stream()
-                .map((statu -> new GetListStatuResponse(statu.getName(), statu.getStatuId())))
+                .map((statu -> new GetListStatuResponse(statu.getName(), statu.getId())))
                 .toList();
     }
 
@@ -55,6 +57,10 @@ public class StatuManager implements StatuService
     public List<GetListStatuResponse> getByNameDto(String name) {
 
         return statuRepository.findByName(name);
+    }
+    @Override
+    public Statu getById(int statuId) {
+        return null;
     }
 
 }

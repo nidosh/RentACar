@@ -6,8 +6,10 @@ import com.tobeto.a.spring.intro.services.dtos.rental.request.AddRentalRequest;
 import com.tobeto.a.spring.intro.services.dtos.rental.request.DeleteRentalRequest;
 import com.tobeto.a.spring.intro.services.dtos.rental.request.UpdateRentalRequest;
 import com.tobeto.a.spring.intro.services.dtos.rental.response.GetListRentalResponse;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -21,22 +23,23 @@ public class RentalController
     }
 
     @PostMapping
-    public void add(@RequestBody AddRentalRequest request){
+    public void add(@RequestBody @Valid AddRentalRequest request){
         rentalService.add(request);
     }
 
     @DeleteMapping
-    public void delete(@PathVariable DeleteRentalRequest request){
+    public void delete(@PathVariable @Valid DeleteRentalRequest request){
         rentalService.delete(request);
     }
 
     @PutMapping
-    public void update(@RequestBody UpdateRentalRequest request){
+    public void update(@RequestBody @Valid UpdateRentalRequest request){
         rentalService.update(request);
     }
 
     @GetMapping("dto")
-    public List<GetListRentalResponse>getByRentalDateDto(@RequestParam String rentalDate){
-        return rentalService.getByRentalDateDto(rentalDate);
+    public List<GetListRentalResponse>getByReturnDateDto(@RequestParam LocalDate returnDate){
+        return rentalService.getByReturnDateDto(String.valueOf(returnDate));
     }
+
 }

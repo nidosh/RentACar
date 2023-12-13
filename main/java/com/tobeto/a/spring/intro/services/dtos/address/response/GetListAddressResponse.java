@@ -1,12 +1,10 @@
 package com.tobeto.a.spring.intro.services.dtos.address.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class GetListAddressResponse {
     private String countryName;
 }

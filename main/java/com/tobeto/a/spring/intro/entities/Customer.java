@@ -1,8 +1,12 @@
 package com.tobeto.a.spring.intro.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @Table(name = "customers")
 @Entity
@@ -12,8 +16,8 @@ public class Customer
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "customer_id")
-    private int customerId;
+    @Column(name = "id")
+    private int id;
 
     @Column(name = "first_name")
     private String firstName;
@@ -27,24 +31,16 @@ public class Customer
     @Column(name = "phone_number")
     private int phoneNumber;
 
+    @Column(name = "birth_date")
+    private LocalDate birth_date;
 
-    //Manytoone
-    //rental
-    @ManyToOne
-    @JoinColumn(name = "rental_id")
-    private Rental rentals;
 
-    //car
-    @ManyToOne
-    @JoinColumn(name = "car_id")
-    private Car cars;
+    @OneToMany(mappedBy = "customer")
+    @JsonIgnore
+    List<Rental>rentals;
 
     @ManyToOne
     @JoinColumn(name = "address_id")
     private Address address;
-
-    @ManyToOne
-    @JoinColumn(name = "payment_id")
-    private PaymentMethods paymentMethods;
 
 }

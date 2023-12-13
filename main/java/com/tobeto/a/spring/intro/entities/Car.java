@@ -22,14 +22,8 @@ public class Car
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "car_id") //name =  kolon adı
-    private int carId; //classın içindeki alanın adı
-
-    @Column(name="brands")
-    private String brands;
-
-    @Column(name = "models")
-    private String models;
+    @Column(name = "id") //name =  kolon adı
+    private int id; //classın içindeki alanın adı
 
     @Column(name = "year")
     private int year;
@@ -41,17 +35,15 @@ public class Car
     //TODO=> ilişkisel status tablosunun alanlarını eklemek
 
     @ManyToOne
-    @JoinColumn(name = "status_id")
-    //tekil ise join column eklemem gerekli.
-    private Statu status;
+    @JoinColumn(name = "model_id")
+    private Model model;
 
-    //one to many
-    //customers
-    @OneToMany(mappedBy = "cars")
+    @OneToMany(mappedBy = "car")
     @JsonIgnore
-    private List<Customer> customers;
+    List<Rental>rentals;
 
-    @ManyToOne
-    @JoinColumn(name = "payment_id")
-    private PaymentMethods paymentMethods;
+    @OneToMany(mappedBy = "car")
+    @JsonIgnore
+    List<Statu>status;
+
 }

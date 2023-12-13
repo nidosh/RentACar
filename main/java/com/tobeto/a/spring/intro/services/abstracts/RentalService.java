@@ -6,6 +6,7 @@ import com.tobeto.a.spring.intro.services.dtos.rental.request.DeleteRentalReques
 import com.tobeto.a.spring.intro.services.dtos.rental.request.UpdateRentalRequest;
 import com.tobeto.a.spring.intro.services.dtos.rental.response.GetListRentalResponse;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface RentalService {
@@ -15,5 +16,9 @@ public interface RentalService {
 
     void update(UpdateRentalRequest request);
 
-    List<GetListRentalResponse>getByRentalDateDto(String rentalDate);
+    List<GetListRentalResponse> getByReturnDateDto();
+
+    List<GetListRentalResponse> getByReturnDateDto(String rentalDate);
+
+    List<GetListRentalResponse> getByReturnDateDto(LocalDate rentalDate);
 }

@@ -15,18 +15,14 @@ public class Statu
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "status_id")
-    private int statuId;
+    @Column(name = "id")
+    private int id;
 
-    @Column(name = "car_status")
+    @Column(name = "name")
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name = "car_id")
+    private Car car;
 
-
-    //one-to-one ilişkilerde list olan değişken
-    //@onetomany
-    //direkt class olan değişken @manytoone
-    @OneToMany(mappedBy = "status") //Car classımda atadığım değişken ismi
-    @JsonIgnore //sonsuz döngüden kaçınmak amacıyla listeleri JSON'da göstermiyoruz.
-    private List<Car> cars;
 }

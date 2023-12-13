@@ -4,5 +4,6 @@ import lombok.Data;
 
 @Data
 public class DeleteCarRequest {
-    private int carId;
+
+    private int id;
 }

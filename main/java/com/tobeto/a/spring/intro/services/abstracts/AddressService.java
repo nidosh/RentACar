@@ -15,4 +15,5 @@ public interface AddressService {
     void update(UpdateAddressRequest request);
 
     List<GetListAddressResponse>getByCountryNameDto(String countryName);
+
 }

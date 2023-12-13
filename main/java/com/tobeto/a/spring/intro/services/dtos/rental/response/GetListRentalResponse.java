@@ -4,10 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class GetListRentalResponse {
-    private String rentalDate;
-    private String endDate;
+    private LocalDate returnDate;
+    private LocalDate endDate;
+    private LocalDate startDate;
 }

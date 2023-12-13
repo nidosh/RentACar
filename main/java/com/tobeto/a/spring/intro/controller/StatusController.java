@@ -4,6 +4,8 @@ import com.tobeto.a.spring.intro.services.dtos.statu.request.AddStatuRequest;
 import com.tobeto.a.spring.intro.services.dtos.statu.request.DeleteStatuRequest;
 import com.tobeto.a.spring.intro.services.dtos.statu.request.UpdateStatuRequest;
 import com.tobeto.a.spring.intro.services.dtos.statu.response.GetListStatuResponse;
+import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +14,7 @@ import java.util.List;
 //Single Responsibility
 @RestController
 @RequestMapping("api/statu")
+@AllArgsConstructor
 public class StatusController
 {
     //Gelen isteği kontrol etmek ve yönlendirmek
@@ -19,22 +22,18 @@ public class StatusController
     //BAĞIMLILIKLAR DAİMA SOYUT NESNELER ÜZERİNDEN
     private StatuService statuService;
 
-    public StatusController(StatuService statuService) {
-        this.statuService = statuService;
-    }
-
     @PostMapping
-    public void add(@RequestBody AddStatuRequest request){
+    public void add(@RequestBody @Valid AddStatuRequest request){
         statuService.add(request);
     }
 
     @DeleteMapping
-    public void delete(@PathVariable DeleteStatuRequest request){
+    public void delete(@PathVariable @Valid DeleteStatuRequest request){
         statuService.delete(request);
     }
 
     @PutMapping
-    public void update(@RequestBody UpdateStatuRequest request){
+    public void update(@RequestBody @Valid UpdateStatuRequest request){
         statuService.update(request);
     }
 

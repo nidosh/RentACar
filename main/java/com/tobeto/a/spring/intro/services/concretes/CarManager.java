@@ -1,66 +1,65 @@
 package com.tobeto.a.spring.intro.services.concretes;
 
 import com.tobeto.a.spring.intro.entities.Car;
+import com.tobeto.a.spring.intro.entities.Statu;
 import com.tobeto.a.spring.intro.repositories.CarRepository;
 import com.tobeto.a.spring.intro.services.abstracts.CarService;
+import com.tobeto.a.spring.intro.services.abstracts.StatuService;
 import com.tobeto.a.spring.intro.services.dtos.car.request.AddCarRequest;
 import com.tobeto.a.spring.intro.services.dtos.car.request.DeleteCarRequest;
 import com.tobeto.a.spring.intro.services.dtos.car.request.UpdateCarRequest;
 import com.tobeto.a.spring.intro.services.dtos.car.response.GetListCarResponse;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class CarManager implements CarService {
+    @Autowired
     private CarRepository carRepository;
 
-    public CarManager(CarRepository carRepository) {
-        this.carRepository = carRepository;
-    }
+
+    private final StatuService statuService;
+
+
+    // Her manager, yalnızca kendi entitysi için repository implementasyonu yapabilir!
+    // Farklı bir entity ile çalışma gereğinde, o entitynin service'i ile çalışmalıdır.
+
 
     @Override
     public void add(AddCarRequest request){
+        //mapleme
+        //bussiness rule
+
+        if(carRepository.existsCarByLicenseNumber(request.getLicenseNumber())){
+            throw new RuntimeException("Aynı plakaya sahip ikinci araç eklenemez!");
+        }
         Car car = new Car();
-        car.setBrands(request.getBrand());
-        car.setModels(request.getModel());
         car.setYear(request.getYear());
         car.setLicenseNumber(request.getLicenseNumber());
+        // FK alanlar => FK alıp, veritabanından ilgili objeyi alarak set ederiz.
         carRepository.save(car);
     }
 
     @Override
     public void delete(DeleteCarRequest request){
-        Car carToDelete = carRepository.findById(request.getCarId()).orElseThrow();
+        Car carToDelete = carRepository.findById(request.getId()).orElseThrow();
         carRepository.delete(carToDelete);
     }
 
     @Override
     public void update(UpdateCarRequest request){
-        Car carToUpdate = carRepository.findById(request.getCarId()).orElseThrow();
+        Car carToUpdate = carRepository.findById(request.getId()).orElseThrow();
         carToUpdate.setLicenseNumber(request.getLicenseNumber());
-        carToUpdate.setBrands(request.getBrand());
-        carToUpdate.setModels(request.getModel());
         carToUpdate.setYear(request.getYear());
         carRepository.save(carToUpdate);
     }
 
     @Override
-    public List<GetListCarResponse> getByModelsNameDto(String models) {
-        return carRepository.findByModels(models);
+    public List<GetListCarResponse>getAll() {
+        return carRepository.getAll();
     }
-
-    @Override
-    public List<GetListCarResponse> getByBrandsNameDto(String brands) {
-        return carRepository.findByModels(brands);
-    }
-
-    @Override
-    public List<GetListCarResponse> getAll() {
-        return carRepository.getAll()
-                .stream()
-                .map((Car) ->new GetListCarResponse(Car.getModels(), Car.getBrands(),Car.getStatus()))
-                .toList();
-    }
-
 }

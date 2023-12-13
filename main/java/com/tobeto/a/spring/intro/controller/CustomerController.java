@@ -6,6 +6,7 @@ import com.tobeto.a.spring.intro.services.dtos.customer.request.AddCustomerReque
 import com.tobeto.a.spring.intro.services.dtos.customer.request.DeleteCustomerRequest;
 import com.tobeto.a.spring.intro.services.dtos.customer.request.UpdateCustomerRequest;
 import com.tobeto.a.spring.intro.services.dtos.customer.response.GetListCustomerResponse;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,17 +22,17 @@ public class CustomerController
     }
 
     @PostMapping
-    public void add(@RequestBody AddCustomerRequest request){
+    public void add(@RequestBody @Valid AddCustomerRequest request){
         customerService.add(request);
     }
 
     @DeleteMapping
-    public void delete(@PathVariable DeleteCustomerRequest request){
+    public void delete(@PathVariable @Valid DeleteCustomerRequest request){
         customerService.delete(request);
     }
 
     @PutMapping
-    public void update(@RequestBody UpdateCustomerRequest request){
+    public void update(@RequestBody @Valid UpdateCustomerRequest request){
         customerService.update(request);
     }
 

@@ -7,14 +7,18 @@ import com.tobeto.a.spring.intro.services.dtos.customer.request.AddCustomerReque
 import com.tobeto.a.spring.intro.services.dtos.customer.request.DeleteCustomerRequest;
 import com.tobeto.a.spring.intro.services.dtos.customer.request.UpdateCustomerRequest;
 import com.tobeto.a.spring.intro.services.dtos.customer.response.GetListCustomerResponse;
-import org.hibernate.annotations.SecondaryRow;
+import com.tobeto.a.spring.intro.services.dtos.rental.response.GetListRentalResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.time.LocalDate;
 
 @Service
 public class CustomerManager implements CustomerService
 {
+    @Autowired
     private CustomerRepository customerRepository;
 
     public CustomerManager(CustomerRepository customerRepository) {
@@ -28,22 +32,24 @@ public class CustomerManager implements CustomerService
         customer.setLastName(request.getLastName());
         customer.setPhoneNumber(request.getPhoneNumber());
         customer.setCardNumber(request.getCardNumber());
+        customer.setBirth_date(request.getBirth_date());
         customerRepository.save(customer);
     }
 
     @Override
     public void delete(DeleteCustomerRequest request){
-        Customer customerToDelete = customerRepository.findById(request.getCustomerId()).orElseThrow();
+        Customer customerToDelete = customerRepository.findById(request.getId()).orElseThrow();
         customerRepository.delete(customerToDelete);
     }
 
     @Override
     public void update(UpdateCustomerRequest request){
-        Customer customerToUpdate = customerRepository.findById(request.getCustomerId()).orElseThrow();
+        Customer customerToUpdate = customerRepository.findById(request.getId()).orElseThrow();
         customerToUpdate.setFirstName(request.getFirstName());
         customerToUpdate.setLastName(request.getLastName());
         customerToUpdate.setPhoneNumber(request.getPhoneNumber());
         customerToUpdate.setCardNumber(request.getCardNumber());
+        customerToUpdate.setBirth_date(request.getBirth_date());
     }
 
     @Override
@@ -55,7 +61,13 @@ public class CustomerManager implements CustomerService
     public List<GetListCustomerResponse> getAll() {
         return customerRepository.getAll()
                 .stream()
-                .map((Customer) -> new GetListCustomerResponse(Customer.getFirstName(), Customer.getLastName(), Customer.getCars(),Customer.getRentals()))
+                .map((Customer) -> new GetListCustomerResponse(
+                        Customer.getFirstName(),
+                        Customer.getLastName(),
+                        Customer.getRentals().stream()
+                        .map(Rental -> new GetListRentalResponse(Rental.getReturnDate(),Rental.getEndDate(),Rental.getStartDate()))
+                        .collect(Collectors.toList()),
+                        Customer.getBirth_date()))
                 .toList();
     }
 

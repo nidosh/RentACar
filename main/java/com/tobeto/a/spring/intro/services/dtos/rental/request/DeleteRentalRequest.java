@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class DeleteRentalRequest
 {
-    private int rentalId;
+    private int id;
 }

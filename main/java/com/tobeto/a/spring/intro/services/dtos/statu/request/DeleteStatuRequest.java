@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class DeleteStatuRequest
 {
-    private int statuId;
+    private int id;
 }
