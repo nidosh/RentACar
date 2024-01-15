@@ -48,6 +48,10 @@ public class StatusController
     public List<GetListStatuResponse>getByNameDto(@RequestParam String name){
         return statuService.getByNameDto(name);
     }
+    @GetMapping("getAll")
+    public List<GetListStatuResponse>getAll(){
+        return statuService.getAll();
+    }
 
 
 }

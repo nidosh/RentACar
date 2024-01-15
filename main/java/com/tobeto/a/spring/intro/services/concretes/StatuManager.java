@@ -7,6 +7,7 @@ import com.tobeto.a.spring.intro.services.dtos.statu.request.AddStatuRequest;
 import com.tobeto.a.spring.intro.services.dtos.statu.request.DeleteStatuRequest;
 import com.tobeto.a.spring.intro.services.dtos.statu.request.UpdateStatuRequest;
 import com.tobeto.a.spring.intro.services.dtos.statu.response.GetListStatuResponse;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +16,9 @@ import java.util.List;
 
 //Manager
 @Service
+@Data
 public class StatuManager implements StatuService
 {
-    @Autowired
     private StatuRepository statuRepository;
 
     public StatuManager(StatuRepository statuRepository) {
@@ -61,6 +62,13 @@ public class StatuManager implements StatuService
     @Override
     public Statu getById(int statuId) {
         return null;
+    }
+
+    @Override
+    public List<GetListStatuResponse> getAll() {
+        return statuRepository.findAll().stream()
+                .map(statu -> new GetListStatuResponse(statu.getName(), statu.getId()))
+                .toList();
     }
 
 }

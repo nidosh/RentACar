@@ -1,7 +1,6 @@
 package com.tobeto.a.spring.intro.services.concretes;
 
 import com.tobeto.a.spring.intro.entities.Car;
-import com.tobeto.a.spring.intro.entities.Statu;
 import com.tobeto.a.spring.intro.repositories.CarRepository;
 import com.tobeto.a.spring.intro.services.abstracts.CarService;
 import com.tobeto.a.spring.intro.services.abstracts.StatuService;
@@ -10,24 +9,22 @@ import com.tobeto.a.spring.intro.services.dtos.car.request.DeleteCarRequest;
 import com.tobeto.a.spring.intro.services.dtos.car.request.UpdateCarRequest;
 import com.tobeto.a.spring.intro.services.dtos.car.response.GetListCarResponse;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.Data;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @AllArgsConstructor
+@Data
 public class CarManager implements CarService {
-    @Autowired
     private CarRepository carRepository;
 
 
     private final StatuService statuService;
 
-
     // Her manager, yalnızca kendi entitysi için repository implementasyonu yapabilir!
     // Farklı bir entity ile çalışma gereğinde, o entitynin service'i ile çalışmalıdır.
-
 
     @Override
     public void add(AddCarRequest request){
@@ -62,4 +59,5 @@ public class CarManager implements CarService {
     public List<GetListCarResponse>getAll() {
         return carRepository.getAll();
     }
+
 }

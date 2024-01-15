@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class GetListCarResponse {
-    private int id;
+    private Integer id;
     private String year;
     private String license_number;
 

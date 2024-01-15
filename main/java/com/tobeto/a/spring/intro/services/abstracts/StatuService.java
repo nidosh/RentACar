@@ -19,5 +19,6 @@ public interface StatuService {
     List<GetListStatuResponse> getByNameDto(String name);
 
     Statu getById(int id);
+    List<GetListStatuResponse>getAll();
 }
 

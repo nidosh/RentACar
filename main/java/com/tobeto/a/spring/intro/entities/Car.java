@@ -23,10 +23,10 @@ public class Car
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id") //name =  kolon adı
-    private int id; //classın içindeki alanın adı
+    private Integer id; //classın içindeki alanın adı
 
     @Column(name = "year")
-    private int year;
+    private Integer year;
 
     @Column(name = "license_number")
     private String licenseNumber;
