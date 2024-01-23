@@ -1,11 +1,11 @@
-package com.tobeto.a.spring.intro.entities;
+package com.tobeto.a.spring.intro.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tobeto.a.spring.intro.entities.abstracts.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 //Repository, DAO, DAL
@@ -18,12 +18,8 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Car
+public class Car extends BaseEntity
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id") //name =  kolon adı
-    private Integer id; //classın içindeki alanın adı
 
     @Column(name = "year")
     private Integer year;

@@ -1,6 +1,7 @@
-package com.tobeto.a.spring.intro.entities;
+package com.tobeto.a.spring.intro.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tobeto.a.spring.intro.entities.abstracts.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,12 +13,9 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Customer
+public class Customer extends BaseEntity
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
+
 
     @Column(name = "first_name")
     private String firstName;

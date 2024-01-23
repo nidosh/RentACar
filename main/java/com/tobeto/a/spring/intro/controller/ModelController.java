@@ -32,8 +32,4 @@ public class ModelController {
         modelService.update(request);
     }
 
-    @GetMapping("dto")
-    public List<GetListModelResponse>getByNameDto(@RequestParam String name){
-        return modelService.getByNameDto(name);
-    }
 }

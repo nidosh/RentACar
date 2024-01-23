@@ -1,6 +1,6 @@
 package com.tobeto.a.spring.intro.services.concretes;
 
-import com.tobeto.a.spring.intro.entities.Customer;
+import com.tobeto.a.spring.intro.entities.concretes.Customer;
 import com.tobeto.a.spring.intro.repositories.CustomerRepository;
 import com.tobeto.a.spring.intro.services.abstracts.CustomerService;
 import com.tobeto.a.spring.intro.services.dtos.customer.request.AddCustomerRequest;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.time.LocalDate;
 
 @Service
 public class CustomerManager implements CustomerService
@@ -50,25 +49,6 @@ public class CustomerManager implements CustomerService
         customerToUpdate.setPhoneNumber(request.getPhoneNumber());
         customerToUpdate.setCardNumber(request.getCardNumber());
         customerToUpdate.setBirth_date(request.getBirth_date());
-    }
-
-    @Override
-    public List<GetListCustomerResponse> getByFirstAndLastNameDto(String firstName, String lastName) {
-        return customerRepository.findByFirstAndLastName(firstName,lastName);
-    }
-
-    @Override
-    public List<GetListCustomerResponse> getAll() {
-        return customerRepository.getAll()
-                .stream()
-                .map((Customer) -> new GetListCustomerResponse(
-                        Customer.getFirstName(),
-                        Customer.getLastName(),
-                        Customer.getRentals().stream()
-                        .map(Rental -> new GetListRentalResponse(Rental.getReturnDate(),Rental.getEndDate(),Rental.getStartDate()))
-                        .collect(Collectors.toList()),
-                        Customer.getBirth_date()))
-                .toList();
     }
 
 

@@ -38,9 +38,5 @@ public class CarController
     }
 
 
-    @GetMapping("getAll")
-    public List<GetListCarResponse>getAll(){
-        return carService.getAll();
-    }
 
 }

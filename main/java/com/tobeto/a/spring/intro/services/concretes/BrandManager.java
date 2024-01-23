@@ -1,6 +1,6 @@
 package com.tobeto.a.spring.intro.services.concretes;
 
-import com.tobeto.a.spring.intro.entities.Brand;
+import com.tobeto.a.spring.intro.entities.concretes.Brand;
 import com.tobeto.a.spring.intro.repositories.BrandRepository;
 import com.tobeto.a.spring.intro.services.abstracts.BrandService;
 import com.tobeto.a.spring.intro.services.dtos.brand.request.AddBrandRequest;
@@ -42,10 +42,5 @@ public class BrandManager implements BrandService {
         brandToUpdate.setName(request.getName());
         brandRepository.save(brandToUpdate);
 
-    }
-
-    @Override
-    public List<GetListBrandResponse> getByNameDto(String name) {
-        return brandRepository.findByNameStartingWith(name);
     }
 }

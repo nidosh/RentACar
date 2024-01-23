@@ -1,6 +1,6 @@
 package com.tobeto.a.spring.intro.services.concretes;
 
-import com.tobeto.a.spring.intro.entities.Car;
+import com.tobeto.a.spring.intro.entities.concretes.Car;
 import com.tobeto.a.spring.intro.repositories.CarRepository;
 import com.tobeto.a.spring.intro.services.abstracts.CarService;
 import com.tobeto.a.spring.intro.services.abstracts.StatuService;
@@ -55,9 +55,5 @@ public class CarManager implements CarService {
         carRepository.save(carToUpdate);
     }
 
-    @Override
-    public List<GetListCarResponse>getAll() {
-        return carRepository.getAll();
-    }
 
 }

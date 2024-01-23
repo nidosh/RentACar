@@ -1,6 +1,7 @@
-package com.tobeto.a.spring.intro.entities;
+package com.tobeto.a.spring.intro.entities.concretes;
 
 
+import com.tobeto.a.spring.intro.entities.abstracts.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,12 +14,8 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @Setter
-public class Rental
+public class Rental extends BaseEntity
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
 
     @Column(name = "return_date")
     private LocalDate returnDate;

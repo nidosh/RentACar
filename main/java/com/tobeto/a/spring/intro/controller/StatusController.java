@@ -37,22 +37,5 @@ public class StatusController
         statuService.update(request);
     }
 
-    //normal hali
-    @GetMapping
-    public List<GetListStatuResponse> getByName(@RequestParam String name){
-        return statuService.getByName(name);
-    }
-
-    //dto'lu hali
-    @GetMapping("dto")
-    public List<GetListStatuResponse>getByNameDto(@RequestParam String name){
-        return statuService.getByNameDto(name);
-    }
-    @GetMapping("getAll")
-    public List<GetListStatuResponse>getAll(){
-        return statuService.getAll();
-    }
-
-
 }
 

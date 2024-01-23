@@ -1,6 +1,5 @@
 package com.tobeto.a.spring.intro.controller;
 
-import com.tobeto.a.spring.intro.entities.Rental;
 import com.tobeto.a.spring.intro.services.abstracts.RentalService;
 import com.tobeto.a.spring.intro.services.dtos.rental.request.AddRentalRequest;
 import com.tobeto.a.spring.intro.services.dtos.rental.request.DeleteRentalRequest;
@@ -35,11 +34,6 @@ public class RentalController
     @PutMapping
     public void update(@RequestBody @Valid UpdateRentalRequest request){
         rentalService.update(request);
-    }
-
-    @GetMapping("dto")
-    public List<GetListRentalResponse>getByReturnDateDto(@RequestParam LocalDate returnDate){
-        return rentalService.getByReturnDateDto(String.valueOf(returnDate));
     }
 
 }

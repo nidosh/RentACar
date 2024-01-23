@@ -1,6 +1,5 @@
 package com.tobeto.a.spring.intro.services.abstracts;
 
-import com.tobeto.a.spring.intro.entities.Rental;
 import com.tobeto.a.spring.intro.services.dtos.rental.request.AddRentalRequest;
 import com.tobeto.a.spring.intro.services.dtos.rental.request.DeleteRentalRequest;
 import com.tobeto.a.spring.intro.services.dtos.rental.request.UpdateRentalRequest;
@@ -16,9 +15,4 @@ public interface RentalService {
 
     void update(UpdateRentalRequest request);
 
-    List<GetListRentalResponse> getByReturnDateDto();
-
-    List<GetListRentalResponse> getByReturnDateDto(String rentalDate);
-
-    List<GetListRentalResponse> getByReturnDateDto(LocalDate rentalDate);
 }

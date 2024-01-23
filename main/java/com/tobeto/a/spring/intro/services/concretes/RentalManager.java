@@ -1,6 +1,6 @@
 package com.tobeto.a.spring.intro.services.concretes;
 
-import com.tobeto.a.spring.intro.entities.Rental;
+import com.tobeto.a.spring.intro.entities.concretes.Rental;
 import com.tobeto.a.spring.intro.repositories.RentalRepository;
 import com.tobeto.a.spring.intro.services.abstracts.RentalService;
 import com.tobeto.a.spring.intro.services.dtos.rental.request.AddRentalRequest;
@@ -45,24 +45,6 @@ public class RentalManager implements RentalService {
         rentalToUpdate.setEndDate(request.getEndDate());
         rentalToUpdate.setStartDate(request.getStartDate());
         rentalRepository.save(rentalToUpdate);
-    }
-
-    @Override
-    public List<GetListRentalResponse> getByReturnDateDto() {
-        return null;
-    }
-    
-    @Override
-    public List<GetListRentalResponse> getByReturnDateDto(String rentalDate) {
-        return null;
-    }
-
-    @Override
-    public List<GetListRentalResponse> getByReturnDateDto(LocalDate rentalDate) {
-        return rentalRepository.findByStartDateAfter(rentalDate)
-                .stream()
-                .map((Rental) -> new GetListRentalResponse(Rental.getReturnDate(),Rental.getEndDate(),Rental.getStartDate()))
-                .toList();
     }
 
 }

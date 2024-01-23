@@ -36,12 +36,4 @@ public class CustomerController
         customerService.update(request);
     }
 
-    @GetMapping("dto")
-    public List<GetListCustomerResponse>getByFirstAndLastNameDto(@RequestParam String firstName, @RequestParam String lastName){
-        return customerService.getByFirstAndLastNameDto(firstName, lastName);
-    }
-    @GetMapping("getAll")
-    public List<GetListCustomerResponse>getAll(){
-        return customerService.getAll();
-    }
 }

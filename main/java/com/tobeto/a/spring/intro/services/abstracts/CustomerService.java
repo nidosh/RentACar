@@ -11,8 +11,5 @@ public interface CustomerService {
     void add(AddCustomerRequest request);
     void delete(DeleteCustomerRequest request);
     void update(UpdateCustomerRequest request);
-    List<GetListCustomerResponse>getByFirstAndLastNameDto(String firstName, String lastName);
-    List<GetListCustomerResponse>getAll();
-
 
 }

@@ -1,6 +1,6 @@
 package com.tobeto.a.spring.intro.services.concretes;
 
-import com.tobeto.a.spring.intro.entities.Address;
+import com.tobeto.a.spring.intro.entities.concretes.Address;
 import com.tobeto.a.spring.intro.repositories.AddressRepository;
 import com.tobeto.a.spring.intro.services.abstracts.AddressService;
 import com.tobeto.a.spring.intro.services.dtos.address.request.AddAddressRequest;
@@ -43,12 +43,5 @@ public class AddressManager implements AddressService {
         addressRepository.save(addressToUpdate);
     }
 
-    @Override
-    public List<GetListAddressResponse> getByCountryNameDto(String countryName) {
-        return addressRepository.getByCountryNameDto(countryName).
-                stream()
-                .map((Address) -> new GetListAddressResponse(Address.getCountryName()))
-                .toList();
-    }
 
 }

@@ -15,5 +15,4 @@ public interface ModelService {
     void delete(DeleteModelRequest request);
     void update(UpdateModelRequest request);
 
-    List<GetListModelResponse>getByNameDto(String name);
 }

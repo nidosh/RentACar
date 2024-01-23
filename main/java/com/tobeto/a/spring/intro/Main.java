@@ -1,6 +1,6 @@
 package com.tobeto.a.spring.intro;
 
-import com.tobeto.a.spring.intro.entities.Statu;
+import com.tobeto.a.spring.intro.entities.concretes.Statu;
 import com.tobeto.a.spring.intro.services.dtos.statu.response.GetListStatuResponse;
 
 import java.util.ArrayList;

@@ -33,12 +33,4 @@ public class AddressController
     public void update(@RequestBody @Valid UpdateAddressRequest request){
         addressService.update(request);
     }
-
-    @GetMapping("dto")
-    public List<GetListAddressResponse>getByCountryNameDto(@RequestParam String countryName){
-        return addressService.getByCountryNameDto(countryName);
-    }
-
-
-
 }

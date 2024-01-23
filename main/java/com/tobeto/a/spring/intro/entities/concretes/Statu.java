@@ -1,22 +1,16 @@
-package com.tobeto.a.spring.intro.entities;
+package com.tobeto.a.spring.intro.entities.concretes;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tobeto.a.spring.intro.entities.abstracts.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.List;
 
 @Table(name = "status")
 @Entity
 @Getter
 @Setter
-public class Statu
+public class Statu extends BaseEntity
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
 
     @Column(name = "name")
     private String name;

@@ -1,6 +1,6 @@
 package com.tobeto.a.spring.intro.services.concretes;
 
-import com.tobeto.a.spring.intro.entities.Model;
+import com.tobeto.a.spring.intro.entities.concretes.Model;
 import com.tobeto.a.spring.intro.repositories.ModelRepository;
 import com.tobeto.a.spring.intro.services.abstracts.ModelService;
 import com.tobeto.a.spring.intro.services.dtos.model.request.AddModelRequest;
@@ -43,10 +43,5 @@ public class ModelManager implements ModelService {
         modelToUpdate.setId(request.getId());
         modelToUpdate.setName(request.getName());
         modelRepository.save(modelToUpdate);
-    }
-
-    @Override
-    public List<GetListModelResponse> getByNameDto(String name) {
-        return modelRepository.findByName(name);
     }
 }

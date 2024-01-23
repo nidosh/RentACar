@@ -22,7 +22,7 @@ public class AddCustomerRequest {
     private int phoneNumber;
 
     @NotBlank
-    @CreditCardNumber
+    //@CreditCardNumber
     private int cardNumber;
 
     @NotBlank

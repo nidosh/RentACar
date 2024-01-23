@@ -16,7 +16,6 @@ public interface CarService {
     void delete(DeleteCarRequest request);
     void update(UpdateCarRequest request);
 
-    List<GetListCarResponse>getAll();
 
 
 }

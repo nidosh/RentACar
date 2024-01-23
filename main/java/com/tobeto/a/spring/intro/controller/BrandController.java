@@ -32,9 +32,5 @@ public class BrandController {
         brandService.update(request);
     }
 
-    @GetMapping("dto")
-    public List<GetListBrandResponse>getByNameDto(@RequestParam String name){
-        return brandService.getByNameDto(name);
-    }
 
 }
